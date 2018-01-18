@@ -20,7 +20,7 @@ COPY entrypoint.sh /entrypoint.sh
 
 RUN sed -i 's/^node/exec\ node/' bin/run.sh
 
-VOLUME /opt/draw/var /opt/draw/node_module
+VOLUME /opt/draw/var /opt/draw/node_modules
 RUN ln -s var/settings.json settings.json
 
 EXPOSE 9002

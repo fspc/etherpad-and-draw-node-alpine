@@ -1,5 +1,5 @@
 # node 9.2 
-FROM node:9-alpine
+FROM node:9.4.0-alpine
 MAINTAINER Jonathan Rosenbaum <fspc@freesoftwarepc.com>
 
 # npm WARN deprecated jade@0.26.3: Jade has been renamed to pug, please install the latest version of pug instead of jade
@@ -21,12 +21,15 @@ RUN curl -SL \
 
 WORKDIR etherpad-lite
 
+COPY installDeps.sh /opt/etherpad-lite/bin/installDeps.sh
+
 RUN bin/installDeps.sh && rm settings.json
 COPY entrypoint.sh /entrypoint.sh
+#COPY installDeps.sh /opt/etherpad-lite/bin/installDeps.sh
 
 RUN sed -i 's/^node/exec\ node/' bin/run.sh
 
-VOLUME /opt/etherpad-lite/var /opt/etherpad-lite/node_module
+VOLUME /opt/etherpad-lite/var /opt/etherpad-lite/node_modules
 RUN ln -s var/settings.json settings.json
 RUN npm install ep_adminpads ep_align ep_authornames ep_comments_page \
                 ep_copy_paste_images ep_define ep_draw ep_font_color ep_font_family \
