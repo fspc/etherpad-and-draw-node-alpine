@@ -47,7 +47,7 @@ LETSENCRYPT_HOST=demodraw.bikelover.org
 LETSENCRYPT_EMAIL=bike@bikelover.org
 ```
 
-## EtherDraw Plugins
+## EtherPad Plugins
 Here are the default plugins installed by npm for etherdraw:
 
 ```
