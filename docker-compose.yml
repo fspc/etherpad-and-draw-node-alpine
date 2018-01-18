@@ -1,0 +1,72 @@
+version: '2.1'
+
+# etherpad and etherdraw 
+# currently 1.6.2 
+# settings.json
+# https://github.com/ether/etherpad-lite/blob/develop/settings.json.template
+
+services:
+
+  etherpad:
+    build: ./etherpad 
+    image: bikebike/etherpad-node-alpine:1.6.2
+    container_name: pad
+    ports:
+      - "9001:9001"
+    volumes:
+      - settings:/opt/etherpad-lite/var
+      - node_modules:/opt/etherpad-lite/node_modules
+    external_links:
+      - ${SQL_CONTAINTER:-mysql}
+    env_file:
+      - pad_environment
+    environment:
+      - MYSQL_ROOT_PASSWORD=${PAD_PASSWORD:-password}
+      - MYSQL_DATABASE=${PAD_DATABASE:-pad}
+      - ETHERPAD_DB_HOST=${DB_HOST:-mysql}
+      - ETHERPAD_DB_NAME=${PAD_DATABASE:-pad}
+      - ETHERPAD_DB_PASSWORD=${PAD_PASSWORD:-password}
+      - ETHERPAD_TITLE=${PAD_TITLE:-Online Flip Chart}
+      - ETHERPAD_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin_password}
+      - ETHERPAD_ADMIN_USER=${ADMIN_USER:-admin}
+      - ETHERDRAW_HOST=${DRAW_HOST:-localhost:9002}
+    network_mode: "bridge"
+    logging:
+      driver: "json-file"  
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: always
+
+  etherdraw:
+    build: ./etherdraw
+    image: bikebike/etherdraw-node-alpine:1.6.2
+    container_name: draw
+    ports:
+      - "9002:9002"
+    volumes:
+      - draw_settings:/opt/draw/var
+    external_links:
+      - ${SQL_CONTAINTER:-mysql} 
+    env_file:
+      - draw_environment
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DRAW_PASSWORD:-password}
+      - MYSQL_DATABASE=${DRAW_DATABASE:-draw}
+      - ETHERPAD_DB_HOST=${DB_HOST:-mysql}
+      - ETHERPAD_DB_NAME=${DRAW_DATABASE:-draw}
+      - ETHERPAD_DB_PASSWORD=${DRAW_PASSWORD:-password}
+      - ETHERPAD_TITLE=${DRAW_TITLE:-Ether Draw}
+      - ETHERPAD_PORT=${DRAW_PORT:-9002}
+    network_mode: "bridge"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: always
+
+volumes:
+  settings:
+  node_modules:
+  draw_settings:
