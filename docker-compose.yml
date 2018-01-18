@@ -9,7 +9,7 @@ services:
 
   etherpad:
     build: ./etherpad 
-    image: bikebike/etherpad-node-alpine:1.6.2
+    image: bikebike/etherpad:1.6.2
     container_name: pad
     ports:
       - "9001:9001"
@@ -40,7 +40,7 @@ services:
 
   etherdraw:
     build: ./etherdraw
-    image: bikebike/etherdraw-node-alpine:1.6.2
+    image: bikebike/etherdraw:1.6.2
     container_name: draw
     ports:
       - "9002:9002"
