@@ -57,7 +57,7 @@ Here are some recommended plugins for etherpad, which include etherdraw function
     ep_page_view ep_print ep_simpletextsearch ep_spellcheck
 ```                
 
-To install, simply run these two docker-compose commands after running docker-compose up -d:
+To install, simply run these two docker-compose commands after running `docker-compose up -d`:
 
 ```
     docker-compose exec etherpad npm install \
