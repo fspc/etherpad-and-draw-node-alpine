@@ -9,7 +9,7 @@ services:
 
   etherpad:
     build: ./etherpad 
-    image: bikebike/etherpad:1.6.2
+    image: bikebike/etherpad:1.6.6
     container_name: pad
     ports:
       - "9001:9001"
