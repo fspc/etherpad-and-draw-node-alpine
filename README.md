@@ -48,7 +48,7 @@ LETSENCRYPT_EMAIL=bike@bikelover.org
 ```
 
 ## EtherPad Plugins
-Here are the default plugins installed by npm for etherdraw:
+Here are some recommended plugins for etherpad, which include etherdraw functionality:
 
 ```
     ep_adminpads ep_align ep_authornames ep_comments_page \
@@ -57,7 +57,17 @@ Here are the default plugins installed by npm for etherdraw:
     ep_page_view ep_print ep_simpletextsearch ep_spellcheck
 ```                
 
-To change, simply edit [etherpad/Dockerfile](https://github.com/fspc/etherpad-and-draw-node-alpine/blob/master/etherpad/Dockerfile) after `RUN npm install`.
+To install, simply run these two docker-compose commands after running docker-compose up -d:
+
+```
+    docker-compose exec etherpad npm install \
+    ep_adminpads ep_align ep_authornames ep_comments_page \
+    ep_copy_paste_images ep_define ep_draw ep_font_color ep_font_family \
+    ep_font_size ep_headings ep_message_all ep_offline_edit \
+    ep_page_view ep_print ep_simpletextsearch ep_spellcheck;
+
+    docker-compose restart etherpad;
+```
 
 If any of the plugins require configuration, simply edit [etherpad/entrypoint.sh](https://github.com/fspc/etherpad-and-draw-node-alpine/blob/master/etherpad/entrypoint.sh) between `cat <<- EOF > settings.json` and `EOF`. 
 
