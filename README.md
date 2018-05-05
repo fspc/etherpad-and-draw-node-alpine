@@ -7,11 +7,11 @@ The etherpad Dockerfile and entrypoint.sh is a fork of the work by [tvelocity](h
 
 ## How to Use
 
-The recommended way is to run `docker-compose up -d`. Out of the box, there is only one requirement: There must be a running container created from one of the official mysql images like [MariaDB](https://hub.docker.com/_/mariadb/). The default name for the container is `mysql`, but you can change the name in .env to whatever you have named your own mysql container:
+The recommended way is to run `docker-compose up -d`. Out of the box, there is only one requirement: There must be a running container created from one of the official mysql images like [MariaDB](https://hub.docker.com/_/mariadb/). The default name for the container is `mysql`, but you can change the name in `.env` to whatever you have named your own mysql container:
 
 `SQL_CONTAINER=my_own_mysql_container_name`
 
-This will bring up two containers on port 9001 (etherpad) and port 9002 (etherdraw). If your are running on localhost, etherdraw should work properly within etherpad. If you are on a network, simply add this line to .env:
+This will bring up two containers on port 9001 (etherpad) and port 9002 (etherdraw). If your are running on localhost, etherdraw should work properly within etherpad. If you are on a network, simply add this line to `.env`:
 
 `DRAW_HOST=the_name_of_the_domain_name_you_are_using.org`
 
